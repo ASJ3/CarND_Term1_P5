@@ -43,8 +43,8 @@ Besides evaluating different HOG parameters, I also looked into different color 
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-The pictures were first covnerted to grayscale, then I tried various parameters of HOG to see if I could improve the accuracy of my Support Vector Machine trained on HOG. While having more orientations seemed to net better results, there is a price to pay in the sense that more orientations made training my SVM longer.
-I settled on the following:
+The pictures were first converted to grayscale, then I tried various parameters of HOG to see if I could improve the accuracy of my Support Vector Machine trained on HOG. While having more orientations seemed to net better results, there is a price to pay in the sense that more orientations made training my SVM longer.
+I settled on the following parameters:
 * Pixels per cell = 8
 * Cells per block = 2
 * Number of orientations = 9
@@ -113,7 +113,7 @@ Here's a [link to my video result](./project_output.mp4). The pipeline for proce
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-The biggest difference between the pipeline for the video and one for an individual picture, is that I kept the valid windows (i.e. the ones displayed on screen) from a few previous frames. This enabled me to smooth out the bounding box surrounding a car. I then adjusted my threshold so that I could give a higher value to the bounding boxes from the current frame, versus those from previous frames.
+The biggest difference between the pipeline for the video and the one for an individual picture, is that I kept the coordinates of valid windows (i.e. the ones displayed on screen) from a few previous frames. This enabled me to smooth out the bounding box surrounding a car. I then adjusted my threshold so that I could give a higher value to the bounding boxes from the current frame, versus those from previous frames.
 
 
 ---
@@ -121,7 +121,7 @@ The biggest difference between the pipeline for the video and one for an individ
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-The video took a fairly long time to process in it entirety, which made experimentation of parameter more difficult. I even tried to run my pipeline on the AWS EC2 instance I used in previous projects, but didn't see much of an improvement, which leads to think that the software method used is not optimized for parallel processing. This is a big problem in a real-word situation, where cars need to be recognized in real time.
+The video took a fairly long time to process in its entirety, which made experimentation of parameter more difficult. I even tried to run my pipeline on the AWS EC2 instance I used in previous projects, but didn't see much of an improvement, which leads me to think that the software method used might not be optimized for parallel processing. This is a big problem in a real-word situation, where cars need to be recognized in real time.
 
 I also do not know how the SVM model would react under different wheather or lighting conditions (i.e. rain, snow, nightime), although I believe this could be solved by either using additional training data, or training different SVM models for different conditions (i.e. one model trained for night time).
 
